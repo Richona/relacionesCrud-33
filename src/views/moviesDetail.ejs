@@ -17,9 +17,24 @@
     <p>AWARDS: <%= movie.awards %> </p>
     <p>LENGTH: <%= movie.length + ' min'%> </p>
     <p>RELEASE DATE: <%= movie.release_date %> </p>
+    <p>GENERO: <%= movie.genero.name %> </p>
+    <p>ACTORES: 
+        <ul>
+            <% movie.actores.forEach(actor => { %>
+                <li><%= actor.first_name %> <%= actor.last_name %></li>
+            <% }) %>
+        </ul>
+        
+    </p>
     <br>
     <section>
         <!--Aquí debe colocar los botones de Modificar - Borrar y Listado de Películas-->
+        <p> <button class="botonAgregar" type="submit"><a href="/movies/edit/<%= movie.id %>">Editar</a></button>
+            
+            <a  class="botonVolver" href="/movies">Listado de Películas</a>
+
+            <button class="botonAgregar" type="submit"><a href="/movies/delete/<%= movie.id %>">Borrar</a></button>
+        </p>
     </section>
 
 </body>

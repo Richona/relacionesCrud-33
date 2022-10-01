@@ -2,6 +2,8 @@ const path = require('path');
 const db = require('../database/models');
 const sequelize = db.sequelize;
 const { Op } = require("sequelize");
+const { redirect } = require('express/lib/response');
+const { resolveSoa } = require('dns');
 
 
 //Aqui tienen una forma de llamar a cada uno de los modelos
@@ -21,7 +23,9 @@ const moviesController = {
             })
     },
     'detail': (req, res) => {
-        db.Movie.findByPk(req.params.id)
+        db.Movie.findByPk(req.params.id, {
+            include: [{association: "genero"}, {association: "actores"}]
+        })
             .then(movie => {
                 res.render('moviesDetail.ejs', {movie});
             });
@@ -52,22 +56,60 @@ const moviesController = {
     },
     //Aqui dispongo las rutas para trabajar con el CRUD
     add: function (req, res) {
-        
+        Genres.findAll({order: ["name"]})
+            .then(allGenres => res.render("moviesAdd", {allGenres}))
+            .catch(error => console.log(error))
     },
     create: function (req,res) {
-
+        const {title, rating, awards, release_date, length, genre_id} = req.body
+        Movies.create({
+            title,
+            rating,
+            awards,
+            release_date,
+            genre_id,
+            length
+        })
+            .then(res.redirect("/movies"))
+            .catch(error => console.log(error))
     },
     edit: function(req,res) {
+        const movieToedit = Movies.findByPk(req.params.id)
 
+        const generos = Genres.findAll({order: ["name"]})
+
+        Promise.all([movieToedit,generos])
+            .then(([Movie, allGenres]) => res.render("moviesEdit", {Movie,allGenres}))
+            .catch(error => console.log(error))
     },
     update: function (req,res) {
-
+        const {title, rating, awards, release_date, length, genre_id} = req.body
+        Movies.update({
+            title,
+            rating,
+            awards,
+            release_date,
+            genre_id,
+            length
+        }, {
+            where: {
+                id: req.params.id
+            }
+        })
+            .then(res.redirect("/movies/detail/ "+req.params.id))
+            .catch(error => console.log(error))
     },
     delete: function (req,res) {
-
+        Movies.findByPk(req.params.id)
+            .then(Movie => res.render("moviesDelete",{Movie}))
+            .catch(error => console.log(error))
     },
     destroy: function (req,res) {
-
+        Movies.destroy({
+            where: {id: req.params.id}
+        })
+            .then(res.redirect("/movies"))
+            .catch(error => console.log(error))
     }
 }
 
