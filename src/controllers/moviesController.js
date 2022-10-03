@@ -4,6 +4,7 @@ const sequelize = db.sequelize;
 const { Op } = require("sequelize");
 const { redirect } = require('express/lib/response');
 const { resolveSoa } = require('dns');
+const moment = require("moment")
 
 
 //Aqui tienen una forma de llamar a cada uno de los modelos
@@ -79,7 +80,7 @@ const moviesController = {
         const generos = Genres.findAll({order: ["name"]})
 
         Promise.all([movieToedit,generos])
-            .then(([Movie, allGenres]) => res.render("moviesEdit", {Movie,allGenres}))
+            .then(([Movie, allGenres]) => res.render("moviesEdit", {Movie,allGenres, moment}))
             .catch(error => console.log(error))
     },
     update: function (req,res) {
