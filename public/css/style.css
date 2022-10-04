@@ -43,3 +43,10 @@ figure{
   margin: auto;
   width: 20%;
 }
+
+.inputInvalidoRed{
+  border-color: red;
+}
+.text-danger{
+  color: red;
+}

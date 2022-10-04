@@ -14,8 +14,12 @@
     <br>
     <section class="formulario">
         <form action="/genres/create" method="POST">
-            <label for="name">Name </label>
-            <p><input type="text" name="name" id="" required></p>
+            <div>
+                <label for="name">Name </label>
+                <p><input type="text" name="name" id="" value="<%= locals.old && old.discount ? old.discount : 0 %>"></p>
+                <p class="text-danger"><%= locals.errors && errors.price ? errors.price.msg : null %></p>
+            </div>
+            
             <label for="ranking">Ranking </label>
             <p><input type="number" name="ranking" id="" required> </p>
             <label for="active">Active </label>
