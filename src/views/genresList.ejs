@@ -13,6 +13,10 @@
     <%- include("./partials/header") %> 
     <h1>LISTADO DE GENEROS</h1>
     <br>
+    <p>
+        <a class="botonAgregar" href="/genres/add">Agregar un Genero</a>
+    </p>
+    <br>
     <ul>
         <% for( let i = 0; i < genres.length; i++ ) { %>
         <li>
@@ -21,6 +25,7 @@
         <% } %>
 
     </ul>
+    
 </body>
 
 </html>
