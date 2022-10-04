@@ -14,18 +14,34 @@
     <h1><%= movie.title %> </h1>    
     <br>
     <p>RATING: <%= movie.rating %> </p>
+    <br>
     <p>AWARDS: <%= movie.awards %> </p>
+    <br>
     <p>LENGTH: <%= movie.length + ' min'%> </p>
+    <br>
     <p>RELEASE DATE: <%= movie.release_date %> </p>
+    <br>
+    <% if (movie.genero) { %>
     <p>GENERO: <%= movie.genero.name %> </p>
-    <p>ACTORES: 
-        <ul>
-            <% movie.actores.forEach(actor => { %>
-                <li><%= actor.first_name %> <%= actor.last_name %></li>
-            <% }) %>
-        </ul>
-        
-    </p>
+    <br>
+    <% }else{ %>
+        <P>No tiene genero esta pelicula</P>
+        <br>
+    <% } %> 
+
+    <% if (movie.actores.length >0) { %>
+        <p>ACTORES: 
+            <ul>
+                <% movie.actores.forEach(actor => { %>
+                    <li><%= actor.first_name %> <%= actor.last_name %></li>
+                <% }) %>
+            </ul>
+        </p>
+    <% }else{ %>
+            <P>No tiene actores esta pelicula</P>
+    <% } %> 
+    
+    
     <br>
     <section>
         <!--Aquí debe colocar los botones de Modificar - Borrar y Listado de Películas-->
