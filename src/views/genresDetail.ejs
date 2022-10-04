@@ -25,6 +25,13 @@
     <% } else{ %>
         <p>Este genero no tiene peliculas</p>
     <% } %> 
-    
+    <br>
+    <section>
+        <!--Aquí debe colocar los botones de Modificar - Borrar y Listado de Películas-->
+        <p> 
+            <button class="botonAgregar" type="submit"><a href="/genres/edit/<%= genre.id %>">Editar</a></button>
+            <button class="botonBorrar" type="submit"><a href="/genres/delete/<%= genre.id %>">Borrar</a></button>
+        </p>
+    </section>
 </body>
 </html>

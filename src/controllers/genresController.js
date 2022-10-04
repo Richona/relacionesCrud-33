@@ -28,29 +28,19 @@ const genresController = {
             .catch(error => console.log(error))
     },
     edit: function(req,res) {
-        const movieToedit = Movies.findByPk(req.params.id)
-
-        const generos = Genres.findAll({order: ["name"]})
-
-        Promise.all([movieToedit,generos])
-            .then(([Movie, allGenres]) => res.render("moviesEdit", {Movie,allGenres, moment}))
-            .catch(error => console.log(error))
+        db.Genre.findByPk(req.params.id)
+            .then(genre => res.render("genresEdit", {genre}))
+            .catch(error => console.log(error))         
     },
     update: function (req,res) {
-        const {title, rating, awards, release_date, length, genre_id} = req.body
-        Movies.update({
-            title,
-            rating,
-            awards,
-            release_date,
-            genre_id,
-            length
+        db.Genre.update({
+           ...req.body
         }, {
             where: {
                 id: req.params.id
             }
         })
-            .then(res.redirect("/movies/detail/ "+req.params.id))
+            .then(res.redirect("/genres/detail/ "+req.params.id))
             .catch(error => console.log(error))
     },
     delete: function (req,res) {
