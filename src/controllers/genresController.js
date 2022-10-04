@@ -44,15 +44,15 @@ const genresController = {
             .catch(error => console.log(error))
     },
     delete: function (req,res) {
-        Movies.findByPk(req.params.id)
-            .then(Movie => res.render("moviesDelete",{Movie}))
+        db.Genre.findByPk(req.params.id)
+            .then(genre => res.render("genresDelete",{genre}))
             .catch(error => console.log(error))
     },
     destroy: function (req,res) {
-        Movies.destroy({
+        db.Genre.destroy({
             where: {id: req.params.id}
         })
-            .then(res.redirect("/movies"))
+            .then(res.redirect("/genres"))
             .catch(error => console.log(error))
     }
 
