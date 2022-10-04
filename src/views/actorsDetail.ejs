@@ -27,5 +27,13 @@
     <% } else{ %>
         <p>Este actor no participo en ninguna pelicula</p>
     <% } %> 
+    <br>
+    <section>
+        <!--Aquí debe colocar los botones de Modificar - Borrar y Listado de Películas-->
+        <p> 
+            <button class="botonAgregar" type="submit"><a href="/actors/edit/<%= actor.id %>">Editar</a></button>
+            <button class="botonBorrar" type="submit"><a href="/actors/delete/<%= actor.id %>">Borrar</a></button>
+        </p>
+    </section>
 </body>
 </html>
