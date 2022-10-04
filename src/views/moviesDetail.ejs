@@ -22,7 +22,7 @@
     <p>RELEASE DATE: <%= movie.release_date %> </p>
     <br>
     <% if (movie.genero) { %>
-    <p>GENERO: <%= movie.genero.name %> </p>
+    <p>GENERO: <a href="/genres/detail/<%= movie.genero.id %>"><%= movie.genero.name %></a></p>
     <br>
     <% }else{ %>
         <P>No tiene genero esta pelicula</P>
