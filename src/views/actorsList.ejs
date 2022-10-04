@@ -13,6 +13,10 @@
     <%- include("./partials/header") %> 
     <h1>LISTADO DE ACTORES</h1>
     <br>
+    <p>
+        <a class="botonAgregar" href="/actors/add">Agregar un actor</a>
+    </p>
+    <br>
     <ul>
         <% for( let i = 0; i < actors.length; i++ ) { %>
         <li>
