@@ -50,15 +50,15 @@ module.exports = {
             .catch(error => console.log(error))
     },
     delete: function (req,res) {
-        db.Genre.findByPk(req.params.id)
-            .then(genre => res.render("genresDelete",{genre}))
+        db.Actor.findByPk(req.params.id)
+            .then(actor => res.render("actorsDelete",{actor}))
             .catch(error => console.log(error))
     },
     destroy: function (req,res) {
-        db.Genre.destroy({
+        db.Actor.destroy({
             where: {id: req.params.id}
         })
-            .then(res.redirect("/genres"))
+            .then(res.redirect("/actors"))
             .catch(error => console.log(error))
     }
 
