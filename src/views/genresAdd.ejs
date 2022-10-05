@@ -16,21 +16,26 @@
         <form action="/genres/create" method="POST">
             <div>
                 <label for="name">Name </label>
-                <p><input type="text" name="name" id="" value="<%= locals.old && old.discount ? old.discount : 0 %>"></p>
-                <p class="text-danger"><%= locals.errors && errors.price ? errors.price.msg : null %></p>
+                <p><input type="text" class="<%= locals.errors && errors.name ? "inputInvalidoRed" : null %>" name="name" id="" value="<%= locals.old && old.name %>"></p>
+                <p class="text-danger"><%= locals.errors && errors.name ? errors.name.msg : null %></p>
+            </div>
+            <div>
+                <label for="ranking">Ranking </label>
+                <p><input type="number" class="<%= locals.errors && errors.ranking ? "inputInvalidoRed" : null %>" name="ranking" id="" value="<%= locals.old && old.ranking %>"> </p>
+                <p class="text-danger"><%= locals.errors && errors.ranking ? errors.ranking.msg : null %></p>
+            </div>
+            <div>
+               <label for="active">Active </label>
+                <p>
+                    <label for="1">Si</label>
+                    <input type="radio" <%= locals.old && old.active == true && "checked" %> name="active" id="1" required value="1">
+                </p>
+                <p>
+                    <label for="0">No</label>
+                    <input type="radio" <%= locals.old && old.active == false && "checked" %> name="active" id="0" required value="0">
+                </p> 
             </div>
             
-            <label for="ranking">Ranking </label>
-            <p><input type="number" name="ranking" id="" required> </p>
-            <label for="active">Active </label>
-            <p>
-                <label for="1">Si</label>
-                <input type="radio" name="active" id="1" required value="1">
-            </p>
-            <p>
-                <label for="0">No</label>
-                <input type="radio" name="active" id="0" required value="0">
-            </p>
             <br>
             <p> <button class="botonAgregar" type="submit">Agregar</button>
             

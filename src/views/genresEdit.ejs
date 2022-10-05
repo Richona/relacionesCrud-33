@@ -14,19 +14,28 @@
     <br>
     <section class="formulario">
         <form action="/genres/update/<%= genre.id %>?_method=PUT" method="POST">
-            <label for="name">Name </label>
-            <p><input type="text" name="name" id="" value="<%= genre.name %>" required></p>
-            <label for="ranking">Ranking </label>
-            <p><input type="number" name="ranking" id="" value="<%= genre.ranking %>" required> </p>
-            <label for="active">Active </label>
-            <p>
-                <label for="1">Si</label>
-                <input type="radio" name="active" id="1" required value="1" <%= genre.active === true && "checked" %>>
-            </p>
-            <p>
-                <label for="0">No</label>
-                <input type="radio" name="active" id="0" required value="0" <%= genre.active === false && "checked" %>>
-            </p>
+            <div>
+                <label for="name">Name </label>
+                <p><input type="text" class="<%= locals.errors && errors.name ? "inputInvalidoRed" : null %>" name="name" id="" value="<%= genre.name %>" ></p>
+                <p class="text-danger"><%= locals.errors && errors.name ? errors.name.msg : null %></p>
+            </div>
+            <div>
+                <label for="ranking">Ranking </label>
+                <p><input type="number" class="<%= locals.errors && errors.ranking ? "inputInvalidoRed" : null %>" name="ranking" id="" value="<%= genre.ranking %>" > </p>
+                <p class="text-danger"><%= locals.errors && errors.ranking ? errors.ranking.msg : null %></p>
+            </div>
+            <div>
+               <label for="active">Active </label>
+                <p>
+                    <label for="1">Si</label>
+                    <input type="radio" name="active" id="1" required value="1" <%= genre.active === true && "checked" %>>
+                </p>
+                <p>
+                    <label for="0">No</label>
+                    <input type="radio" name="active" id="0" required value="0" <%= genre.active === false && "checked" %>>
+                </p> 
+            </div>
+            
             <br>
             <p> <button class="botonAgregar" type="submit">Editar</button>
             
