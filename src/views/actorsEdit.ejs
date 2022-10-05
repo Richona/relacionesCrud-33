@@ -14,19 +14,31 @@
     <br>
     <section class="formulario">
         <form action="/actors/update/<%= actor.id %>?_method=PUT" method="POST">
-            <label for="first_name">Name </label>
-            <p><input type="text" name="first_name" id="" required value="<%= actor.first_name %>"></p>
-            <label for="last_name">Lastname </label>
-            <p><input type="text" name="last_name" id="" required value="<%= actor.last_name %>"> </p>
-            <label for="rating">rating </label>
-            <p><input type="number" name="rating" id="1" required value="<%= actor.rating %>"></p>
-            <label for="favorite_movie_id">Favorite Movie </label>
-            <select name="favorite_movie_id" id="" required>
-                <option value="" disabled selected>- select movie - </option>
-                <% movie.forEach(movie => { %>
-                <option value="<%= movie.id %>" <% if (actor.favorite_movie_id == movie.id) { %><%= 'selected' %><% }; %>><%= movie.title %></option>
-                <% }); %>
-            </select>
+            <div>
+               <label for="first_name">Name </label>
+                <p><input type="text" class="<%= locals.errors && errors.first_name ? "inputInvalidoRed" : null %>" name="first_name" id=""  value="<%= actor.first_name %>"></p>
+                <p class="text-danger"><%= locals.errors && errors.first_name ? errors.first_name.msg : null %></p>
+            </div>
+            <div>
+               <label for="last_name">Lastname </label>
+                <p><input type="text" class="<%= locals.errors && errors.last_name ? "inputInvalidoRed" : null %>" name="last_name" id=""  value="<%= actor.last_name %>"> </p>
+                <p class="text-danger"><%= locals.errors && errors.last_name ? errors.last_name.msg : null %></p> 
+            </div>
+            <div>
+                <label for="rating">rating </label>
+                <p><input type="number" class="<%= locals.errors && errors.rating ? "inputInvalidoRed" : null %>" name="rating" id="1"  value="<%= actor.rating %>"></p>
+                <p class="text-danger"><%= locals.errors && errors.rating ? errors.rating.msg : null %></p>
+            </div>
+            <div>
+               <label for="favorite_movie_id">Favorite Movie </label>
+                <select name="favorite_movie_id" id="" >
+                    <option value="" disabled selected>- select movie - </option>
+                    <% movie.forEach(movie => { %>
+                    <option value="<%= movie.id %>" <% if (locals.old ? +locals.old.favorite_movie_id === movie.id : actor.favorite_movie_id == movie.id) { %><%= 'selected' %><% }; %>><%= movie.title %></option>
+                    <% }); %>
+                </select> 
+            </div>
+            
             <br>
             <br>
             <p> <button class="botonAgregar" type="submit">Editar</button>
